@@ -18,9 +18,9 @@ function Drop({ ele }) {
         }}
             onDragOver={(e) => e.preventDefault()}>
             <button className=" float-right p-2 bg-blue-600 rounded-3xl px-8 mr-6 text-white font-bold sticky z-40" onClick={() => console.log('website is saved succesfully')}>Save</button>
-            {ref.map((data, index) => <Draggable key={index} scale={1} >
-                <div key={index} >{data}</div>
-                </Draggable>)}
+            {ref.map((data, index) => <div key={index} ><Draggable scale={1} >
+                {data}
+            </Draggable></div>)}
 
         </div>
     )
