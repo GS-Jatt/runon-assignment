@@ -11,7 +11,7 @@ function Drop({ ele }) {
             if (ele.current){
                 // const no = document.importNode(ele.current, true);
                 setRef((re) => [...re, ele.current]);
-                ele.current = null;
+                ele.current = false;
             }
             // e.target.appendChild(element);
             // console.log(ele.current);
