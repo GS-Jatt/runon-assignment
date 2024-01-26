@@ -8,10 +8,11 @@ function Drop({ ele }) {
     return (
         <div className="border-2 flex-1 overflow-scroll relative " onDrop={(e) => {
             e.preventDefault();
-            if (!ele.current) return '';
-            // const no = document.importNode(ele.current, true);
-            setRef((re) => [...re, ele.current]);
-            ele.current = null;
+            if (ele.current){
+                // const no = document.importNode(ele.current, true);
+                setRef((re) => [...re, ele.current]);
+                ele.current = null;
+            }
             // e.target.appendChild(element);
             // console.log(ele.current);
         }}
