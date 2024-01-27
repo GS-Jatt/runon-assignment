@@ -1,17 +1,18 @@
-'use client'
+"use client";
 import Drop from "@/components/drop";
 import ToolBar from "@/components/ToolBar";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function Draganddrop() {
+    const dragRef = useRef(false);
     const ref = useRef();
     return (
         <div className="flex min-h-screen max-h-screen  overflow-hidden">
-            <ToolBar ele={ref} />
+            <ToolBar ele={ref} dragRef={dragRef} />
 
-            <Drop ele={ref} />
+            <Drop ele={ref} dragRef={dragRef} />
         </div>
     );
 }
 
-export default Draganddrop
+export default Draganddrop;

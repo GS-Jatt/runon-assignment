@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { cloneElement, useRef } from "react";
 
-function Toolbar({ ele }) {
+function Toolbar({ ele, dragRef }) {
     const text = <textarea defaultValue={'Text'} className=" text-center font-bold bg-transparent z-10 relative" />;
 
     const image = <Image src={'/cabin-008.jpg'} alt="image" width={500} height={300} style={{zIndex:'0',position:'relative'}} />;
@@ -14,6 +14,7 @@ function Toolbar({ ele }) {
                 draggable onDrag={(e) => {
                     e.preventDefault()
                     ele.current = cloneElement(text);
+                    dragRef.current = true;
                     // e.dataTransfer.setData('text', e.target.id)
                 }} >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -25,6 +26,8 @@ function Toolbar({ ele }) {
             <div className="flex gap-4 items-center justify-center w-40 bg-gray-400 h-11  rounded-lg " draggable onDrag={(e) => {
                 e.preventDefault()
                 ele.current = cloneElement(image);
+                dragRef.current = true;
+
                 // e.dataTransfer.setData('text', e.target.id)
             }} >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
