@@ -1,7 +1,36 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { cloneElement, isValidElement, useRef, useState } from "react";
+import Image from "next/image";
+import { cloneElement, isValidElement, useEffect, useRef, useState } from "react";
 import ReactGridLayout from "react-grid-layout";
+
+
+function Iimage({id}) {
+    const [src, setSrc] = useState('/cabin-008.jpg')
+   
+    const uploader = (file) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            localStorage.setItem('id', reader.result)
+            setSrc(localStorage.getItem('id'));
+        })
+        reader.readAsDataURL(file);
+    }
+    return (
+        <div className=" relative">
+            <input type="file" accept="image/*" className=" float-end  w-64 pl-1 -mr-36 pl-36 rotate-90" onChange={(e) => {
+                e.preventDefault();
+                uploader(e.target.files[0])
+                // localStorage.setItem(id, e.target.files[0]);
+                // setSrc(localStorage.getItem(id));
+                // console.log(e.target.files[0])
+            }}
+            />
+            <img src={src} alt="image" className=" w-60 h-40" style={{ zIndex: '0', position: 'relative' }} />
+        </div>
+    )
+};
 
 function Drop({ ele, dragRef }) {
     const [ref, setRef] = useState([]);
@@ -36,10 +65,11 @@ function Drop({ ele, dragRef }) {
                 maxRows={200}
                 rowHeight={200}
                 
+                
             >
                 {
                 ref.map((data, index) =><div key={index}>
-                    {data}
+                    {data === 'Iimage'?<Iimage id={index}/>:data }
                 </div>)
                 }
             </ReactGridLayout>

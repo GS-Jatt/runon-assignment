@@ -1,12 +1,28 @@
 'use client'
 
 import Image from "next/image";
-import { cloneElement, useRef } from "react";
+import { cloneElement, useRef, useState } from "react";
+
+function Iimage(){
+    const [src, setSrc] = useState('/cabin-008.jpg')
+
+    return (
+        <div className=" relative">
+            <input type="file" accept="image/*" onChange={(e) => {
+                e.preventDefault();
+                localStorage.setItem(e.target.value, e.target.files[0]);
+                setSrc(localStorage.getItem(e.target.value));
+            }}
+            />
+            <Image src={src} alt="image" width={500} height={300} style={{ zIndex: '0', position: 'relative' }} />
+        </div>
+    )
+};
 
 function Toolbar({ ele, dragRef }) {
     const text = <textarea defaultValue={'Text'} className=" text-center font-bold bg-transparent z-10 relative" />;
 
-    const image = <Image src={'/cabin-008.jpg'} alt="image" width={500} height={300} style={{zIndex:'0',position:'relative'}} />;
+    
 
     return (
         <div className=" w-80 border-2 flex flex-col items-center pt-20 gap-10 ">
@@ -25,8 +41,9 @@ function Toolbar({ ele, dragRef }) {
             </div>
             <div className="flex gap-4 items-center justify-center w-40 bg-gray-400 h-11  rounded-lg " draggable onDrag={(e) => {
                 e.preventDefault()
-                ele.current = cloneElement(image);
+                ele.current = 'Iimage';
                 dragRef.current = true;
+
 
                 // e.dataTransfer.setData('text', e.target.id)
             }} >
